@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{AA3EB028-7D3B-4D83-B86B-28224F9F41F6}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Static Code Analysis", "Static Code Analysis", "{10E8F883-DFA1-40A2-8AC5-FD332D96085E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{16542423-4E75-4496-86C0-C7DD2A92EC86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DF46E4EA-087C-4AF0-AE87-554F1245AE6A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlienFX", "src\AlienFX\AlienFX.csproj", "{74A1308E-114B-4EC0-9352-183C02677903}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlienFX.Cli", "src\AlienFX.Cli\AlienFX.Cli.csproj", "{BE41C1EF-725A-42AD-9B48-B6E0B850024B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74A1308E-114B-4EC0-9352-183C02677903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74A1308E-114B-4EC0-9352-183C02677903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74A1308E-114B-4EC0-9352-183C02677903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74A1308E-114B-4EC0-9352-183C02677903}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE41C1EF-725A-42AD-9B48-B6E0B850024B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE41C1EF-725A-42AD-9B48-B6E0B850024B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE41C1EF-725A-42AD-9B48-B6E0B850024B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE41C1EF-725A-42AD-9B48-B6E0B850024B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{74A1308E-114B-4EC0-9352-183C02677903} = {16542423-4E75-4496-86C0-C7DD2A92EC86}
+		{BE41C1EF-725A-42AD-9B48-B6E0B850024B} = {16542423-4E75-4496-86C0-C7DD2A92EC86}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD785A27-8123-4D1C-8C6A-C43B692B0E6D}
+	EndGlobalSection
+EndGlobal
