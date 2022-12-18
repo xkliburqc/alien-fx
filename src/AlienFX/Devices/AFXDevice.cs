@@ -3,20 +3,41 @@ using Microsoft.Win32.SafeHandles;
 
 namespace AlienFX.Devices;
 
+/// <summary>
+/// <code>AFXDevice</code> class.
+/// </summary>
 public abstract class AFXDevice
 {
     protected SafeFileHandle _handle = new();
     protected short _length = -1;
     private readonly int _version = -1;
     private readonly byte _reportId = 0;
+    private readonly string _devicePath;
+    private readonly int _vendorId;
+    private readonly int _productId;
     protected bool _isReady = false;
 
-    public AFXDevice(SafeFileHandle handle, short length, int version, byte reportId)
+    public string DeviceType => AFX.GetDeviceType(_version);
+    public int VendorId => _vendorId;
+    public int ProductId => _productId;
+    public string DevicePath => _devicePath;
+
+    public AFXDevice(
+        SafeFileHandle handle,
+        short length,
+        int version,
+        byte reportId,
+        string devicePath,
+        int vid,
+        int pid)
     {
         _handle = handle;
         _length = length;
         _version = version;
         _reportId = reportId;
+        _devicePath = devicePath;
+        _vendorId = vid;
+        _productId = pid;
     }
 
     protected bool PrepareAndSend(byte[] command, AFXCommand[]? mods = null)
@@ -53,7 +74,7 @@ public abstract class AFXDevice
         return GetStatus(buffer);
     }
 
-    public bool SetColor(uint index, RGBColor rgb, bool loop)
+    /*public bool SetColor(uint index, RGBColor rgb, bool loop)
     {
         if (!_isReady)
             Reset();
@@ -64,11 +85,18 @@ public abstract class AFXDevice
             Loop();
 
         return val;
-    }
+    }*/
 
     protected abstract bool PrepareAndSend(byte[] buffer);
     protected abstract byte GetStatus(byte[] buffer);
     protected abstract void Loop();
     protected abstract bool Reset();
     protected abstract bool SetColor(uint index, RGBColor color);
+    protected abstract bool UpdateColors();
+    public abstract bool SetBrightness(byte brightness, bool power);
+
+    public override string ToString()
+    {
+        return $"{DeviceType} Device VID#{VendorId} PID#{ProductId} ApiV{_version} Device Path: {DevicePath}";
+    }
 }

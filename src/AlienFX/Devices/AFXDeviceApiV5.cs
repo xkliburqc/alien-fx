@@ -9,10 +9,31 @@ public sealed class AFXDeviceApiV5 : AFXDevice
     private static readonly byte[] s_comm_colorSet = new byte[] { 0x8c, 0x02 };
     private static readonly byte[] s_comm_loop = new byte[] { 0x8c, 0x13 };
     private static readonly byte[] s_comm_reset = new byte[] { 0x94 };
+    private static readonly byte[] s_comm_turnOnInit = new byte[]
+		{0x79,0x7b,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+		0xff,0xff,0xff,0xff,0xff,0xff,0x7c,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+		0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0x87,0xff,0xff,0xff,0x00,0xff,
+		0xff,0xff,0x00,0xff,0xff,0xff,0x00,0x77};
+    private static readonly byte[] s_comm_turnOnInit2 = new byte[] { 0x79, 0x88 };
+    private static readonly byte[] s_comm_turnOnSet = new byte[] { 0x83, 0x38, 0x9c };
+    private static readonly byte[] s_comm_update = new byte[] { 0x8b, 0x01, 0xff };
 
-    public AFXDeviceApiV5(SafeFileHandle handle, short length, byte reportId)
-        : base(handle, length, 5, reportId)
+    public AFXDeviceApiV5(SafeFileHandle handle, short length, byte reportId, string devicePath, int vid, int pid)
+        : base(handle, length, 5, reportId, devicePath, vid, pid)
     {
+    }
+
+    public override bool SetBrightness(byte brightness, bool power)
+    {
+        if (_isReady)
+        {
+            UpdateColors();
+        }
+
+        Reset();
+        base.PrepareAndSend(s_comm_turnOnInit, null);
+        base.PrepareAndSend(s_comm_turnOnInit2, null);
+        return base.PrepareAndSend(s_comm_turnOnSet, new AFXCommand[]{ new AFXCommand{ index =4, value = brightness} });
     }
 
     protected override byte GetStatus(byte[] buffer)
@@ -57,5 +78,17 @@ public sealed class AFXDeviceApiV5 : AFXDevice
         };
 
         return PrepareAndSend(s_comm_colorSet, mods);
+    }
+
+    protected override bool UpdateColors()
+    {
+        bool res = base.PrepareAndSend(s_comm_update, null);
+
+        if (res)
+        {
+            _isReady = false;
+        }
+
+        return res;
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 using AlienFX.Invoke;
 using Microsoft.Win32.SafeHandles;
 
@@ -37,15 +31,14 @@ public class AFXDeviceFactory
                 _ = Hid.HidP_GetCaps(prep_caps, ref caps);
                 Hid.HidD_FreePreparsedData(prep_caps);
                 short length = caps.OutputReportByteLength;
-                short vendorId = attributes.VendorID;
 
-                afxDevice = GetDevice(handle, length, caps, vendorId);
+                afxDevice = GetDevice(handle, length, caps, attributes.VendorID, devPath, attributes.ProductID);
             }
         }
         return afxDevice;
     }
     
-    private static AFXDevice? GetDevice(SafeFileHandle handle, short length, HIDP_CAPS caps, short vendorId)
+    private static AFXDevice? GetDevice(SafeFileHandle handle, short length, HIDP_CAPS caps, short vendorId, string devicePath, short productId)
     {
         switch (length)
         {
@@ -53,7 +46,7 @@ public class AFXDeviceFactory
                 {
                     if (caps.Usage == 0xcc && vendorId == 0x0d62)
                     {
-                        return new AFXDeviceApiV5(handle, caps.FeatureReportByteLength, 0xcc);
+                        return new AFXDeviceApiV5(handle, caps.FeatureReportByteLength, 0xcc, devicePath, vendorId, productId);
                     }
                 }
                 break;
@@ -61,7 +54,7 @@ public class AFXDeviceFactory
                 {
                     if (vendorId == 0x187c)
                     {
-                        return new AFXDeviceApiV4(handle, length, 0);
+                        return new AFXDeviceApiV4(handle, length, 0, devicePath, vendorId, productId);
                     }
                 }
                 break;

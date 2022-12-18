@@ -20,7 +20,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DF46E4EA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlienFX", "src\AlienFX\AlienFX.csproj", "{74A1308E-114B-4EC0-9352-183C02677903}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlienFX.Cli", "src\AlienFX.Cli\AlienFX.Cli.csproj", "{BE41C1EF-725A-42AD-9B48-B6E0B850024B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlienFX.Cli", "src\AlienFX.Cli\AlienFX.Cli.csproj", "{BE41C1EF-725A-42AD-9B48-B6E0B850024B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlienFX.Hub", "src\AlienFX.Hub\AlienFX.Hub.csproj", "{C4B58E64-23E6-4469-83CC-6980C7B2C0A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installers", "Installers", "{6170CCA0-99D1-425E-BA5B-1A6D92BC4711}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AlienFX Installer", "setup\AlienFX Installer\AlienFX Installer.vdproj", "{A7BD364E-D792-4003-944C-9EFD3C9C6638}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +42,12 @@ Global
 		{BE41C1EF-725A-42AD-9B48-B6E0B850024B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE41C1EF-725A-42AD-9B48-B6E0B850024B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE41C1EF-725A-42AD-9B48-B6E0B850024B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4B58E64-23E6-4469-83CC-6980C7B2C0A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4B58E64-23E6-4469-83CC-6980C7B2C0A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4B58E64-23E6-4469-83CC-6980C7B2C0A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4B58E64-23E6-4469-83CC-6980C7B2C0A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7BD364E-D792-4003-944C-9EFD3C9C6638}.Debug|Any CPU.ActiveCfg = Debug
+		{A7BD364E-D792-4003-944C-9EFD3C9C6638}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +55,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{74A1308E-114B-4EC0-9352-183C02677903} = {16542423-4E75-4496-86C0-C7DD2A92EC86}
 		{BE41C1EF-725A-42AD-9B48-B6E0B850024B} = {16542423-4E75-4496-86C0-C7DD2A92EC86}
+		{C4B58E64-23E6-4469-83CC-6980C7B2C0A8} = {16542423-4E75-4496-86C0-C7DD2A92EC86}
+		{A7BD364E-D792-4003-944C-9EFD3C9C6638} = {6170CCA0-99D1-425E-BA5B-1A6D92BC4711}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD785A27-8123-4D1C-8C6A-C43B692B0E6D}

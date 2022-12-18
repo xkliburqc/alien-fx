@@ -4,6 +4,18 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>alienfx-sdk</AssemblyName>
+    <Title>AlienFX</Title>
+    <Version>0.0.1</Version>
+    <Description></Description>
+    <ProductName></ProductName>
+    <Copyright></Copyright>
+    <Authors></Authors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
   </PropertyGroup>
 
 </Project>
