@@ -1,13 +1,11 @@
 ﻿using AlienFX.Devices;
 using AlienFX.Invoke;
-using System.ComponentModel;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace AlienFX;
 
 /// <summary>
-/// <code>AFX</code> class.
+/// Class <c>AFX</c> models all functions to be used within an application.
 /// </summary>
 public static class AFX
 {
@@ -120,6 +118,12 @@ public static class AFX
         return sps;
     }
 
+    /// <summary>
+    /// This method get the value of AlienFX in power setting.
+    /// <remarks>Instead of returning two values for battery and sector,
+    /// it return the value corresponding to the current power setting.</remarks>
+    /// </summary>
+    /// <returns></returns>
     public static bool GetAlienFXPowerSetting()
     {
         Dictionary<string, string> powerProfile = PowerProfile.GetCurrentPowerProfile();
@@ -127,7 +131,8 @@ public static class AFX
         if (powerProfile.ContainsKey(s_alienfx_readable_name))
         {
             string value = powerProfile[s_alienfx_readable_name];
-            return value == "1" ? true : false;
+
+            return value == "1";
         }
 
         return true;

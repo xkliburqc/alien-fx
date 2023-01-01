@@ -1,41 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Interop;
 using AlienFX.Devices;
 using AlienFX.Hub.Models;
-using AlienFX.Hub.Shared;
 using AlienFX.Invoke;
 using Microsoft.Win32;
 
 namespace AlienFX.Hub.ViewModels;
+
+/// <summary>
+/// Class <c>MainWindowViewModel</c> models the main window <c>ViewModel</c>.
+/// </summary>
 public class MainWindowViewModel
 {
     private IntPtr _handle;
     private HwndSource? _source;
     private List<AFXDevice> _afxDevices = new();
-    private AlienFXState _state = new();
+    private readonly AlienFXState _state = new();
 
-    public static ICommand ChangeBrightnessCommand
+    /// <summary>Gets the application title.</summary>
+    public static string Title => "AlienFX Hub";
+    /// <summary>Gets the application description.</summary>
+    public static string Description => "This application controls AlienFX compatible lights";
+    /// <summary>Gets the application version.</summary>
+    public static string Version 
     {
         get
         {
-            return new DelegateCommand
-            {
-                CanExecuteFunc = () => true,
-                CommandAction = () =>
-                {
-                    List<Devices.AFXDevice> devices = AFX.FindDevices();
-                    devices.ForEach(x => x.SetBrightness(255, true));
-                }
-            };
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fileVersion = FileVersionInfo.GetVersionInfo(assembly.Location);
+
+            return fileVersion.FileVersion!;
         }
     }
 
+    /// <summary>
+    /// This method initialize the main window and attach window messages hook.
+    /// </summary>
     public void Initialize()
     {
         WindowInteropHelper helper = new(Application.Current.MainWindow);
+
         _handle = helper.EnsureHandle();
         _source = HwndSource.FromHwnd(_handle);
         _source.AddHook(WindowsMessageHook);
@@ -43,26 +51,24 @@ public class MainWindowViewModel
         SystemEvents.PowerModeChanged += new PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
 
         _afxDevices = AFX.FindDevices();
+
         InitializeAlienFX();
+
+        RegisterHotKeys();
     }
 
     private void InitializeAlienFX()
     {
         _ = UpdatePowerSettings();
+
         UpdateLights();
     }
 
-    private void UpdateLights()
+    private void UpdateLights() //TODO: Need to support a mapping
     {
-        if (_state.IsAlienFXOn)
-        {
-            _afxDevices.ForEach(x => x.SetBrightness(_state.Brightness, true));
-        }
-        else
-        {
-            _afxDevices.ForEach(x => x.SetBrightness(0, true));
-        }
-        //
+        byte brightness = ((byte)(_state.IsAlienFXOn ? _state.Brightness : 0));
+
+        _afxDevices.ForEach(x => x.SetBrightness(brightness));
     }
 
     private bool UpdatePowerSettings()
@@ -88,17 +94,13 @@ public class MainWindowViewModel
         {
             _state.Brightness = 255;
         }
-        else if (_state.Brightness == 255)
-        {
-            _state.Brightness = 128;
-        }
         else
         {
             _state.Brightness = 0;
         }
     }
 
-    public void RegisterHotKeys()
+    private void RegisterHotKeys()
     {
         AFX.RegisterHotKey(_handle, User32.HOTKEY_ID, 0, User32.VK_F18);
     }
@@ -135,8 +137,7 @@ public class MainWindowViewModel
         return IntPtr.Zero;
     }
 
-    private void SystemEvents_PowerModeChanged(object sender,
-                          PowerModeChangedEventArgs e)
+    private void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
     {
         if (UpdatePowerSettings())
         {

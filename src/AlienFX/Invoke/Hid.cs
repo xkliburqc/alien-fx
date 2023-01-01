@@ -3,6 +3,10 @@ using System.Runtime.InteropServices;
 
 namespace AlienFX.Invoke;
 
+/// <summary>
+/// Class <c>Hid</c> expose access to native windows
+/// functions contained in <c>hid.dll</c>.
+/// </summary>
 internal static class Hid
 {
     [DllImport("hid.dll", EntryPoint = "HidD_GetHidGuid", SetLastError = true)]

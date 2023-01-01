@@ -1,25 +1,33 @@
-﻿using AlienFX;
+﻿using System.Drawing;
+using AlienFX;
 using AlienFX.Devices;
-using AlienFX.Structures;
-/*
+
 List<AFXDevice> devices = AFX.FindDevices();
 
 foreach (AFXDevice device in devices)
 {
     Console.WriteLine(device.ToString());
-    /*
-    RGBColor color = new()
+
+    Color red = Color.FromArgb(255, 0, 0);
+    Color green = Color.FromArgb(0, 255, 0);
+
+    for (uint i = 0; i < 200; i++)
     {
-        red = (byte)Random.Shared.Next(255),
-        green = (byte)Random.Shared.Next(255),
-        blue = (byte)Random.Shared.Next(255),
-    };*/
+        device.SetColor(i, red);
+    }
 
-//device.SetColor(1, color, true);
-//device.SetColor(2, color, true);
-//device.SetColor(3, color, true);
+    for (uint i = 0; i < 136; i++)
+    {
+        device.SetColor(i, green);
+        if(i > 0)
+        {
+            device.SetColor(i-1, red);
+        }
+        Console.WriteLine($"Showing index: {i}");
+        Console.ReadKey();
+    }
 
-//device.SetBrightness(255, true);
-//}
+    device.SetBrightness(255);
+}
 
-AFX.GetCurrentPowerProfile();
+//AFX.GetCurrentPowerProfile();

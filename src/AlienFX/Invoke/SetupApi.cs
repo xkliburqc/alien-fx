@@ -2,6 +2,10 @@
 
 namespace AlienFX.Invoke;
 
+/// <summary>
+/// Class <c>SetupApi</c> expose access to native windows
+/// functions contained in <c>setupapi.dll</c>.
+/// </summary>
 internal static class SetupApi
 {
     [DllImport("setupapi.dll", CharSet = CharSet.Auto)]

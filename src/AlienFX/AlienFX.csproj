@@ -6,11 +6,11 @@
     <Nullable>enable</Nullable>
     <AssemblyName>alienfx-sdk</AssemblyName>
     <Title>AlienFX</Title>
-    <Version>0.0.1</Version>
+    <Version>0.2.1</Version>
     <Description></Description>
-    <ProductName></ProductName>
+    <ProductName>AlienFX SDK</ProductName>
     <Copyright></Copyright>
-    <Authors></Authors>
+    <Authors>Jonathan St-Michel</Authors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 

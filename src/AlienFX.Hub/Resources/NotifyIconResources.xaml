@@ -3,9 +3,9 @@
                     xmlns:tb="http://www.hardcodet.net/taskbar"
                     xmlns:local="clr-namespace:AlienFX.Hub.ViewModels">
     <ContextMenu x:Shared="false" x:Key="SysTrayMenu">
-        <!--<MenuItem x:Uid="Show_Window" Header="Afficher la fenêtre" Command="{Binding ShowWindowCommand}" />
+        <MenuItem x:Uid="Show_Window" Header="Afficher la fenêtre" Command="{Binding ShowWindowCommand}" />
         <MenuItem x:Uid="Hide_Window" Header="Cacher la fenêtre" Command="{Binding HideWindowCommand}" />
-        <Separator/>-->
+        <Separator/>
         <MenuItem x:Uid="Quit" Header="Quitter" Command="{Binding ExitApplicationCommand}" />
     </ContextMenu>
     <tb:TaskbarIcon
@@ -13,6 +13,7 @@
         ToolTipText="AlienFX"
         IconSource="/alienfx.ico"
         MenuActivation="RightClick"
+        DoubleClickCommand="{Binding ShowWindowCommand}"
         ContextMenu="{StaticResource SysTrayMenu}">
         <tb:TaskbarIcon.DataContext>
             <local:NotifyIconViewModel/>

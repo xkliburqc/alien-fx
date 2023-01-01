@@ -7,6 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AlienFX.Invoke;
+
+/// <summary>
+/// Class <c>PowerProfile</c> expose access to native windows
+/// functions contained in <c>powrprof.dll</c>.
+/// </summary>
 internal class PowerProfile
 {
     public static readonly uint s_error_more_data = 234;
